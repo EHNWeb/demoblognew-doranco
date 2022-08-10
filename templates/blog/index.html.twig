@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BlogController!
+{% endblock %}
+
+{% block body %}
+
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success text-center">{{ message }}</div>
+	{% endfor %}
+	
+	<section class="row articles">
+
+		{# ARTICLE est une variable de réception: elle parcoure un article par tour de boucle FOR #}
+		{# TABARTICLES est le tableau envoyé depuis la méthode index() #}
+			{% for article in tabArticles %}
+
+				<article
+				class="col-md-6 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1"> {# SYMPHONY accède à la propriété title de l'objet article via son GETTER #}
+				<h2>{{ article.title }}</h2>
+				{# date() est un filtre TWIG permettant de formater/convertir un objet DateTime en une chaîne de caractères #}
+				<div class="metadata">Ecrit le
+					{{ article.createAt|date('d/m/Y à H:i:s') }}
+					dans la catégorie politique</div>
+				<div class="content">
+					<img src="{{ article.image }}" alt="Photo aléatoire depuis picsum">
+					{{ article.content|raw }}
+					<a href="{{ path('blog_show', {id: article.id}) }}" class="btn btn-primary">Lire la suite</a>
+					{# path() est une fonction TWIG permettant de générer un lien vers une page #}
+					{# cette fonction prend en 1er argument le nom de la route (name=xxxx) #}
+					{# Le 2ème argument est un tableau de paramètre de route #}
+					{# Ici, pour pouvoir générer un lien vers la route BLOG_SHOW, PATH() a besoin d'un paramètre ID qui correspond à l'ID d'un article #}
+					<a href="{{ path('blog_edit', {id: article.id}) }}" class="btn btn-sm btn-warning"> <i class="fa-solid fa-pen"></i></a>
+					<a href="{{ path('blog_delete', {id: article.id}) }}" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+				</div>
+			</article>
+		{% endfor %}
+
+	</section>
+{% endblock %}

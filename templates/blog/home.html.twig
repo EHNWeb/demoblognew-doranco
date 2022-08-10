@@ -1,0 +1,41 @@
+{# EXTENDS permet d'hériter d'un template #}
+{# lorsque nous héritons d'un template, le reste du code doit se trouver dans des blocs #}
+{# le contenu des blocs de la page écrase le contenu des blocs de la bases #}
+{% extends "base.html.twig" %}
+
+{# Création d'un block #}
+{% block title %}
+    Accueil
+{% endblock %}
+
+{% block body %}
+    <p>Bonjour à tous</p>
+    <p>Voici la page d'accueil</p>
+
+	{# Affichage de la variable title déclarée dans la méthode home() du BlogController #}
+	{{ title }}
+
+	{% if age <= 18 %}
+        <p>Tu es majeur</p>
+	{% else %}
+		<p>Tu es mineur</p>
+	{% endif %}
+
+	{# set permet de créer une variable #}
+	{% set city = 'Paris' %}
+	{# Affichage de la variable crée #}
+	{{ city }}
+
+	{% if city starts with 'P' %}
+		<p>{{ city }}
+			commence par un P</p>
+	{% endif %}
+
+	{% if city ends with 'F' %}
+		<p>{{city}}
+			finit par un F</p>
+	{% else %}
+		<p>{{ city }}
+			ne finit pas par un F</p>
+	{% endif %}
+{% endblock %}
