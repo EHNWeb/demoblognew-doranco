@@ -1,0 +1,30 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "oliadkuxrl9xdugh.chr7pe7iynqr.eu-west-1.rds.amazonaws.com",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "demoblog heroku",
+            "username": "dk7v3v4hj9557r8x",
+            "password": "fhhzw5ndgt5couiv",
+            "database": "y0xuoqnpsqxyyohl"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "demoblog local",
+            "database": "demoblog",
+            "username": "root",
+            "password": ""
+        }
+    ]
+}
