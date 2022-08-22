@@ -17,6 +17,7 @@ class ArticleFixtures extends Fixture
         // Creation de 3 categories
         for ($i = 1; $i <= 3; $i++) {
             $category = new Category;
+            $category->setTitle($faker->sentence(3, false));
         }
     }
 }
