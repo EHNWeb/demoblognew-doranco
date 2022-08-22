@@ -37,11 +37,18 @@
                 }
             }) }}
 	{{ form_row(formArticle.image) }}
-		<button type="submit" class="btn btn-primary mt-2"> {% if editMode %}
-			Modifier
-		{% else %}
-			Enregistrer
-		{% endif %}
+
+	{{ form_row(formArticle.category, {
+		label: "Catégories"
+	    })
+	}}
+	
+	<button type="submit" class="btn btn-primary mt-2">
+	{% if editMode %}
+		Modifier
+	{% else %}
+		Enregistrer
+	{% endif %}
 	</button>
 
 	{{ form_end(formArticle) }}

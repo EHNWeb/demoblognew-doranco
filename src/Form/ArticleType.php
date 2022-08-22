@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Article;
+use App\Entity\Category;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,6 +20,10 @@ class ArticleType extends AbstractType
             ->add('title')
             ->add('content')
             ->add('image')
+            ->add('category', EntityType::class, [    // On indique que le champ CATEGORY est une entité
+                'class' => Category::class,           // On indique que l'entité est CAATEGORY
+                'choice_label' => 'title'             // On indique que je veux afficher les titres des categories
+            ])
             // Nous commentons le champs createDate car la date sera ajouter automatiquement lors de l'insertion en BDD
             // ->add('createAt')
         ;
