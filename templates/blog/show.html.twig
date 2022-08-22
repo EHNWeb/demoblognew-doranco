@@ -15,11 +15,11 @@
 			{# SYMPHONY accède à la propriété title de l'objet article via son GETTER #}
 			<h2>{{ article.title }}</h2>
 			{# date() est un filtre TWIG permettant de formater/convertir un objet DateTime en une chaîne de caractères #}
-			<div class="metadata">Ecrit le
-				{{ article.createAt|date('d/m/Y à H:i:s') }}
-				dans la catégorie politique</div>
+			<div class="metadata">
+			    Ecrit le {{ article.createAt|date('d/m/Y à H:i:s') }} dans la catégorie {{ article.category.title }}
+			</div>
 			<div class="content">
-				<img src="{{ article.image }}" alt="Photo aléatoire depuis picsum">
+				<img class="img-fluid" src="{{ article.image }}" alt="Photo aléatoire depuis picsum">
 				{{ article.content|raw }}
 				<a href="{{ path('blog_edit', {id: article.id}) }}" class="btn btn-sm btn-warning">
 					<i class="fa-solid fa-pen"></i>
