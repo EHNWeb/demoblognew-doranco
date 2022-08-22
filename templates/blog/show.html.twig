@@ -5,47 +5,47 @@
 
 {% block body %}
 
-	{% for message in app.flashes('success') %}
-		<div class="alert alert-success text-center">{{ message }}</div>
-	{% endfor %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success text-center">{{ message }}</div>
+    {% endfor %}
 
-	<section class="row article">
-		<article
-			class="col-md-3 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1">
-			{# SYMPHONY accède à la propriété title de l'objet article via son GETTER #}
-			<h2>{{ article.title }}</h2>
-			{# date() est un filtre TWIG permettant de formater/convertir un objet DateTime en une chaîne de caractères #}
-			<div class="metadata">
-			    Ecrit le {{ article.createAt|date('d/m/Y à H:i:s') }} dans la catégorie {{ article.category.title }}
-			</div>
-			<div class="content">
-				<img class="img-fluid" src="{{ article.image }}" alt="Photo aléatoire depuis picsum">
-				{{ article.content|raw }}
-				<a href="{{ path('blog_edit', {id: article.id}) }}" class="btn btn-sm btn-warning">
-					<i class="fa-solid fa-pen"></i>
-				</a>
-				<a href="{{ path('blog_delete', {id: article.id}) }}" class="btn btn-sm btn-danger">
-					<i class="fa-solid fa-trash-can"></i>
-				</a>
-			</div>
-		</article>
-	</section>
+    <section class="row article">
+        <article
+            class="col-md-3 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1">
+            {# SYMPHONY accède à la propriété title de l'objet article via son GETTER #}
+            <h2>{{ article.title }}</h2>
+            {# date() est un filtre TWIG permettant de formater/convertir un objet DateTime en une chaîne de caractères #}
+            <div class="metadata">
+                Ecrit le {{ article.createAt|date('d/m/Y à H:i:s') }} dans la catégorie {{ article.category.title }}
+            </div>
+            <div class="content">
+                <img class="img-fluid" src="{{ article.image }}" alt="Photo aléatoire depuis picsum">
+                {{ article.content|raw }}
+                <a href="{{ path('blog_edit', {id: article.id}) }}" class="btn btn-sm btn-warning">
+                    <i class="fa-solid fa-pen"></i>
+                </a>
+                <a href="{{ path('blog_delete', {id: article.id}) }}" class="btn btn-sm btn-danger">
+                    <i class="fa-solid fa-trash-can"></i>
+                </a>
+            </div>
+        </article>
+    </section>
 
-	<h2 class="text-center mx-auto m-3">Commentaire(s)</h2>
-	<section id="commentaires" class="col-md-10 mx-auto">
-	{% for comment in article.comments %}
-	    <div class="comment">
-		    <div class="row">
-			    <div class="col-md-3">
-				    {{ comment.author }}<br>(<small>{{ comment.createdAt|date("d/m/y à H:m:s") }}</small>)
-				</div>
-				<div class="col-md-9">
-				    {{ comment.content|raw }}
-				</div>
-		    </div>
-		</div>
-		<hr>
-	{% endfor %}
-	</section>
+    <h2 class="text-center mx-auto m-3">Commentaire(s)</h2>
+    <section id="commentaires" class="col-md-10 mx-auto">
+    {% for comment in article.comments %}
+        <div class="comment">
+            <div class="row">
+                <div class="col-md-3">
+                    {{ comment.author }}<br>(<small>{{ comment.createdAt|date("d/m/y à H:m:s") }}</small>)
+                </div>
+                <div class="col-md-9">
+                    {{ comment.content|raw }}
+                </div>
+            </div>
+        </div>
+        <hr>
+    {% endfor %}
+    </section>
 
 {% endblock %}
