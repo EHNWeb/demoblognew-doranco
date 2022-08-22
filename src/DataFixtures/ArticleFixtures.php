@@ -48,9 +48,18 @@ class ArticleFixtures extends Fixture
 
                     // Initialisation des données
                     $content = "<p>" . join("</p><p>", $faker->paragraphs(2, true)) . "</p>";
-                    $now = new \DateTime;
-                    $interval = $now->diff($article->getCreateAt());
+                    // Methodde 1
+                    // $now = new \DateTime;
+                    // $interval = $now->diff($article->getCreateAt());
+                    // $days = $interval->days;
 
+                    // Methode 2
+                    $days = (new \DateTime())->diff($article->getCreateAt()->days);
+
+                    $comment->setAuthor($faker->name)
+                    ->setContent($content)
+                    ->setCreatedAt($faker->dateTimeBetween('-'.$days.' days'))
+                    ->setArticle($article);
                 }
             }
         }
