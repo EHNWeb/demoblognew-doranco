@@ -24,7 +24,7 @@
 				</div>
 				<div class="content">
 					<img class="img-fluid" src="{{ article.image }}" alt="Photo aléatoire depuis picsum">
-					{{ article.content|raw }}
+					{{ article.content|slice(0, 30)|raw }} ...<br>
 					<a href="{{ path('blog_show', {id: article.id}) }}" class="btn btn-primary">Lire la suite</a>
 					{# path() est une fonction TWIG permettant de générer un lien vers une page #}
 					{# cette fonction prend en 1er argument le nom de la route (name=xxxx) #}

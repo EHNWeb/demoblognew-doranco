@@ -30,4 +30,22 @@
 			</div>
 		</article>
 	</section>
+
+	<h2 class="text-center mx-auto m-3">Commentaire(s)</h2>
+	<section id="commentaires" class="col-md-10 mx-auto">
+	{% for comment in article.comments %}
+	    <div class="comment">
+		    <div class="row">
+			    <div class="col-md-3">
+				    {{ comment.author }}<br>(<small>{{ comment.createdAt|date("d/m/y à H:m:s") }}</small>)
+				</div>
+				<div class="col-md-9">
+				    {{ comment.content|raw }}
+				</div>
+		    </div>
+		</div>
+		<hr>
+	{% endfor %}
+	</section>
+
 {% endblock %}
