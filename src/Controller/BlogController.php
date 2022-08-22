@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Comment;
 use App\Form\ArticleType;
+use App\Form\CommentType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -47,10 +49,30 @@ class BlogController extends AbstractController
     /**
      * @Route("/blog/show/{id}", name="blog_show")
      */
-    public function show($id, ArticleRepository $repo): Response
+    public function show($id, ArticleRepository $repo, Request $superGlobals, EntityManagerInterface $manager): Response
     {
         // Appel de la méthode FIND pour récupérer l'éléments ID
         $article = $repo->find($id);
+
+        $commentaire = new Comment();
+        $messageForm = "Le commentaire a été ajouté !";
+
+        // CREATEFORM permet de récupérer un formulaire existant #}
+        $form = $this->createForm(CommentType::class, $commentaire);
+
+        // HandleRequest permet d'insérer les données du formulaire dans l'objet $article
+        //Elle permet aussi de faire des vérifications sur le formulaire
+        $form->handleRequest($superGlobals);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($commentaire);
+            $manager->flush();
+            $this->addFlash('success', $messageForm);
+            return $this->redirectToRoute('blog_show', [
+                'id' => $article->getId()
+            ]);
+        }
+
         return $this->render('blog/show.html.twig', [
             'article' => $article
         ]);
