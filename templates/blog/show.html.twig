@@ -35,10 +35,36 @@
 	</section>
 
 	<h2 class="text-center mx-auto m-3">Commentaire(s)</h2>
+	
 	{% if app.user is not null %}
-		<a href="{{ path('blog_edit', {id: article.id}) }}" class="btn btn-sm btn-info">
-			<i class="fa-solid fa-comment-medical"></i>
-		</a>
+	<div class="col-md-6 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1">
+		{{ form_start(formComment, {
+				attr: {
+					novalidate: 'novalidate'
+				}
+				})
+			}}
+
+			{{ form_row(formComment.content, {
+					label: " ",
+					attr: {
+						placeholder: "Ecrivez un commentaire ..."
+					}
+				})
+			}}
+
+			{{ form_row(formComment.author, {
+			attr: {
+				value: app.user.id,
+			}
+		})
+	}}
+			
+			<button type="submit" class="btn btn-primary mt-2">Poster le commentaire</button>
+
+		{{ form_end(formComment) }}
+	</div>
+
 	{% endif %}
 	<section id="commentaires" class="col-md-10 mx-auto">
 		{% for comment in article.comments %}

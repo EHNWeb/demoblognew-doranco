@@ -55,6 +55,9 @@ class BlogController extends AbstractController
         $article = $repo->find($id);
 
         $commentaire = new Comment();
+        $commentaire->setArticle($article);
+        //$commentaire->setAuthor($user->getId());
+        $commentaire->setCreatedAt(new \DateTime());
         $messageForm = "Le commentaire a été ajouté !";
 
         // CREATEFORM permet de récupérer un formulaire existant #}
@@ -74,6 +77,7 @@ class BlogController extends AbstractController
         }
 
         return $this->render('blog/show.html.twig', [
+            'formComment' => $form->createView(),
             'article' => $article
         ]);
     }
