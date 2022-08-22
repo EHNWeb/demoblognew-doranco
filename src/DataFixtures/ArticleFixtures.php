@@ -23,7 +23,7 @@ class ArticleFixtures extends Fixture
             // Initialisation des données
             $category->setTitle($faker->sentence(3, false));
 
-            // Insertin en BDD
+            // Creation requete Insertion en BDD
             $manager->persist($category);
 
             // Creation des articles entre 4 et 6
@@ -31,15 +31,15 @@ class ArticleFixtures extends Fixture
                 // Creation de l'Objet
                 $article = new Article;
 
-                // initialisation des données
-                $content = "<p>" . join("</p><p>", $faker->paragraphs(5, true)) . "</p>";
+                // Initialisation des données
+                $content = "<p>" . join("</p><p>", $faker->paragraphs(5)) . "</p>";
                 $article->setTitle($faker->sentence(3, false))
                     ->setContent($content)
                     ->setImage($faker->imageUrl)
                     ->setCreateAt($faker->dateTimeBetween("-6 months"))
                     ->setCategory($category);
 
-                // Insertion en BDD
+                //  Creation requete Insertion en BDD
                 $manager->persist($article);
 
                 for ($k = 1; $k <= mt_rand(5, 10); $k++) {
@@ -47,21 +47,27 @@ class ArticleFixtures extends Fixture
                     $comment = new Comment;
 
                     // Initialisation des données
-                    $content = "<p>" . join("</p><p>", $faker->paragraphs(2, true)) . "</p>";
+                    $content = "<p>" . join("</p><p>", $faker->paragraphs(2)) . "</p>";
                     // Methodde 1
                     // $now = new \DateTime;
                     // $interval = $now->diff($article->getCreateAt());
                     // $days = $interval->days;
 
                     // Methode 2
-                    $days = (new \DateTime())->diff($article->getCreateAt()->days);
+                    $days = (new \DateTime())->diff($article->getCreateAt())->days;
 
                     $comment->setAuthor($faker->name)
                     ->setContent($content)
                     ->setCreatedAt($faker->dateTimeBetween('-'.$days.' days'))
                     ->setArticle($article);
+
+                    //  Creation requete Insertion en BDD
+                    $manager->persist($comment);
                 }
             }
         }
+
+        // Execution de toutes les requetes $manager->persiste()
+        $manager->flush();
     }
 }
