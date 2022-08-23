@@ -35,37 +35,36 @@
 	</section>
 
 	<h2 class="text-center mx-auto m-3">Commentaire(s)</h2>
-	
+
 	{% if app.user is not null %}
-	<div class="col-md-6 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1">
-		{{ form_start(formComment, {
-				attr: {
-					novalidate: 'novalidate'
-				}
-				})
-			}}
-
-			{{ form_row(formComment.content, {
-					label: " ",
+		<div class="col-md-6 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1">
+			{{ form_start(formComment, {
 					attr: {
-						placeholder: "Ecrivez un commentaire ..."
+						novalidate: 'novalidate'
 					}
-				})
-			}}
+					})
+				}}
 
-			{{ form_row(formComment.author, {
-			attr: {
-				value: app.user.id,
-			}
-		})
-	}}
-			
+			{{ form_widget(formComment.content, {
+						attr: {
+							placeholder: "Ecrivez un commentaire ..."
+						}
+					})
+				}}
+
 			<button type="submit" class="btn btn-primary mt-2">Poster le commentaire</button>
 
-		{{ form_end(formComment) }}
-	</div>
-
+			{{ form_end(formComment) }}
+		</div>
+	{% else %}
+		<div class="text-center">
+			Il faut être connecté pour écrire un commentaire
+			<a href="{{ path('app_register') }}" class="btn btn-sm btn-info">
+				<i class="fa-solid fa-comment-medical"></i>
+			</a>
+		</div>
 	{% endif %}
+
 	<section id="commentaires" class="col-md-10 mx-auto">
 		{% for comment in article.comments %}
 			<div class="comment">

@@ -51,17 +51,20 @@ class BlogController extends AbstractController
      */
     public function show($id, ArticleRepository $repo, Request $superGlobals, EntityManagerInterface $manager): Response
     {
+        // Récupération diu formulaire pour les commentaires
+        $commentaire = new Comment();
+        // CREATEFORM permet de récupérer un formulaire existant #}
+        $form = $this->createForm(CommentType::class, $commentaire);
+
         // Appel de la méthode FIND pour récupérer l'éléments ID
         $article = $repo->find($id);
 
-        $commentaire = new Comment();
         $commentaire->setArticle($article);
         //$commentaire->setAuthor($user->getId());
         $commentaire->setCreatedAt(new \DateTime());
         $messageForm = "Le commentaire a été ajouté !";
 
-        // CREATEFORM permet de récupérer un formulaire existant #}
-        $form = $this->createForm(CommentType::class, $commentaire);
+
 
         // HandleRequest permet d'insérer les données du formulaire dans l'objet $article
         //Elle permet aussi de faire des vérifications sur le formulaire
