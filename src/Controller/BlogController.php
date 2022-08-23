@@ -7,6 +7,8 @@ use App\Entity\Comment;
 use App\Form\ArticleType;
 use App\Form\CommentType;
 use App\Repository\ArticleRepository;
+use App\Repository\CommentRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -66,10 +68,10 @@ class BlogController extends AbstractController
         $messageForm = "Le commentaire a été ajouté !";
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             $commentaire->setCreatedAt(new \DateTime())
-            ->setArticle($article)
-            ->setAuthor($this->getUser());
+                ->setArticle($article)
+                ->setAuthor($this->getUser());
 
             $manager->persist($commentaire);
             $manager->flush();

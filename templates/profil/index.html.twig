@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BlogController!
+{% endblock %}
+
+{% block body %}
+	{% if app.user is not null %}
+
+		<section class="row article">
+			<article
+				class="col-md-3 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1">
+				{# SYMPHONY accède à la propriété title de l'objet article via son GETTER #}
+				<h2>Profil details</h2>
+				{# date() est un filtre TWIG permettant de formater/convertir un objet DateTime en une chaîne de caractères #}
+				<div class="content">
+					<table>
+						<tr>
+							<td>Id:</td>
+							<td>{{ app.user.id }}</td>
+						</tr>
+						<tr>
+							<td>Nom:</td>
+							<td>{{ app.user.lastname }}</td>
+						</tr>
+						<tr>
+							<td>Prénom:</td>
+							<td>{{ app.user.firstname }}</td>
+						</tr>
+						<tr>
+							<td>E-mail:</td>
+							<td>{{ app.user.email }}</td>
+						</tr>
+					</table>
+				</div>
+			</article>
+		</section>
+
+		<h2 class="text-center mx-auto m-3">Commentaire(s): {{ tabCommnetaires }}</h2>
+
+		<section id="commentaires" class="col-md-10 mx-auto">
+			{% for comment in tabCommentaires %}
+				<div class="comment">
+					<div class="row">
+						<div class="col-md-3">
+							{{ comment.id }}
+							{{ comment.author.lastname }}<br>(<small>{{ comment.createdAt|date("d/m/y à H:m:s") }}</small>)
+						</div>
+						<div class="col-md-9">
+							{{ comment.content|raw }}
+						</div>
+					</div>
+				</div>
+				<hr>
+			{% endfor %}
+		</section>
+	{% else %}
+		<div class="alert alert-danger text-center">
+			Il faut être connecté pour voir son profil et ses commentaires !
+		</div>
+	{% endif %}
+
+{% endblock %}
