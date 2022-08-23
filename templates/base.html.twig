@@ -32,10 +32,11 @@
 					<div class="navbar-nav">
 						<a class="nav-link active" aria-current="page" href="{{ path('home') }}">Accueil</a>
 						<a class="nav-link" href="{{ path('app_blog') }}">Liste des articles</a>
-                        
+
 						<a class="nav-link" href="{{ path('blog_create') }}">Nouvel article</a>
 						<a class="nav-link disabled">{{ "now"|date("m/d/Y H:i:s") }}</a>
 						{% if app.user is not null %}
+							<div class="nav-link">Bonjour {{ app.user.firstname }}</div>
 							<div>
 								<a href="{{ path('app_logout') }}" class="btn btn-sm btn-danger">
 									<i class="fa-solid fa-arrow-right-from-bracket"></i>
