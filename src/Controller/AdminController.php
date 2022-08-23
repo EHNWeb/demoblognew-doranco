@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,6 +72,27 @@ class AdminController extends AbstractController
         return $this->renderForm("admin/article_form.html.twig", [
             'formArticle' => $form,
             'editMode' => $article->getId() !== NULL
-        ]);          
+        ]);
+    }
+
+    /**
+     * @Route("/admin/article/delete/{id}", name="admin_delete_article")
+     */
+    public function article_delete(EntityManagerInterface $manager, ArticleRepository $repo, $id)
+    {
+        $article = $repo->find($id);
+
+        // remove() prepare la suppression d'un article
+        $manager->remove($article);
+
+        // Execution de la requete preparée
+        $manager->flush();
+
+        // addFlash() permet de créer un message de notification
+        // Le 1er argument est le type du message que l'on veut
+        // Le 2nd argument est le message
+        $this->addFlash('success', "L'article n° $id a bien été supprimé !");
+
+        return $this->redirectToRoute("admin_articles");
     }
 }
