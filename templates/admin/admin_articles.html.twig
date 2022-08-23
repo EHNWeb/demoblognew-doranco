@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+{% block body %}
+
+	<table class="table">
+		<thead>
+			<tr>
+				{% for data in champs %}
+					<th>{{ data }}</th>
+				{% endfor %}
+				<th>Catégorie</th>
+				<th>Editer</th>
+				<th>Supprimer</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for article in articles %}
+				<tr>
+					<td>{{ article.id }}</td>
+					<td>{{ article.title }}</td>
+					<td>{{ article.content|slice(0, 30)|raw }}</td>
+					<td><img src="{{ article.image }}" class="img-fluid"  width="250" height="200"></td>
+					<td>{{ article.createAt|date("d/m/Y à H:m:s") }}</td>
+					<td>{{ article.category.title }}</td>
+					<td>
+						<a href="{{ path('blog_edit', {id: article.id}) }}" class="text-warning">
+							<i class="fa-solid fa-pen"></i>
+						</a>
+					</td>
+					<td>
+						<a href="{{ path('blog_delete', {id: article.id}) }}" class="text-danger">
+							<i class="fa-solid fa-trash-can"></i>
+						</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+{% endblock %}
