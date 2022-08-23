@@ -53,24 +53,24 @@ class BlogController extends AbstractController
     {
         // Récupération diu formulaire pour les commentaires
         $commentaire = new Comment();
+
         // CREATEFORM permet de récupérer un formulaire existant #}
         $form = $this->createForm(CommentType::class, $commentaire);
-
-        // Appel de la méthode FIND pour récupérer l'éléments ID
-        $article = $repo->find($id);
-
-        $commentaire->setArticle($article);
-        //$commentaire->setAuthor($user->getId());
-        $commentaire->setCreatedAt(new \DateTime());
-        $messageForm = "Le commentaire a été ajouté !";
-
-
 
         // HandleRequest permet d'insérer les données du formulaire dans l'objet $article
         //Elle permet aussi de faire des vérifications sur le formulaire
         $form->handleRequest($superGlobals);
 
+        // Appel de la méthode FIND pour récupérer l'éléments ID
+        $article = $repo->find($id);
+        $messageForm = "Le commentaire a été ajouté !";
+
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            $commentaire->setCreatedAt(new \DateTime())
+            ->setArticle($article)
+            ->setAuthor($this->getUser());
+
             $manager->persist($commentaire);
             $manager->flush();
             $this->addFlash('success', $messageForm);
@@ -98,7 +98,7 @@ class BlogController extends AbstractController
             $article->setCreateAt(new \DateTime());
             $messageForm = "L'article a bien été crée !";
         } else {
-            $messageForm = "L'article n° ".$article->getId()." a bien été modifié !";
+            $messageForm = "L'article n° " . $article->getId() . " a bien été modifié !";
         }
 
         // CREATEFORM permet de récupérer un formulaire existant #}

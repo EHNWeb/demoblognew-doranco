@@ -34,7 +34,7 @@
 		</article>
 	</section>
 
-	<h2 class="text-center mx-auto m-3">Commentaire(s)</h2>
+	<h2 class="text-center mx-auto m-3">Commentaire(s): {{ article.comments|length }}</h2>
 
 	{% if app.user is not null %}
 		<div class="col-md-6 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1">
@@ -59,7 +59,7 @@
 	{% else %}
 		<div class="text-center">
 			Il faut être connecté pour écrire un commentaire
-			<a href="{{ path('app_register') }}" class="btn btn-sm btn-info">
+			<a href="{{ path('app_login') }}" class="btn btn-sm btn-info">
 				<i class="fa-solid fa-comment-medical"></i>
 			</a>
 		</div>
@@ -70,7 +70,7 @@
 			<div class="comment">
 				<div class="row">
 					<div class="col-md-3">
-						{{ comment.author }}<br>(<small>{{ comment.createdAt|date("d/m/y à H:m:s") }}</small>)
+						{{ comment.author.firstname }} {{ comment.author.lastname }}<br>(<small>{{ comment.createdAt|date("d/m/y à H:m:s") }}</small>)
 					</div>
 					<div class="col-md-9">
 						{{ comment.content|raw }}
