@@ -25,7 +25,7 @@ class ProfilController extends AbstractController
         // 2nd méthode: Affichage d'un template d'erreur personnalisé
         // return $this->render("error/profile_denied.html.twig");
         //
-        // 3eme méthode: Lancement d'une erreur
+        // 3eme méthode: Lancement d'une erreur avec overide de template Symfony
         // }
 
         // Appel de la méthode FINDBY pour récupérer tous les éléments
