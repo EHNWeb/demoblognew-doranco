@@ -17,6 +17,17 @@ class ProfilController extends AbstractController
 
         $user = $this->getUser();
 
+        // if ($user == null)
+        // {
+        //  1ère méthode: Redirection vers une autre page
+        //  return $this->redirectoRoute('app_login')
+        //
+        // 2nd méthode: Affichage d'un template d'erreur personnalisé
+        // return $this->render("error/profile_denied.html.twig");
+        //
+        // 3eme méthode: Lancement d'une erreur
+        // }
+
         // Appel de la méthode FINDBY pour récupérer tous les éléments
         // Condition: WHERE author = $user
         $commentaires = $repo->findBy(["author" => $user]);

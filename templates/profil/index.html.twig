@@ -12,51 +12,42 @@
 				{# SYMPHONY accède à la propriété title de l'objet article via son GETTER #}
 				<h2>Profil details</h2>
 				{# date() est un filtre TWIG permettant de formater/convertir un objet DateTime en une chaîne de caractères #}
-				<div class="content">
-					<table>
-						<tr>
-							<td>Id:</td>
-							<td>{{ app.user.id }}</td>
-						</tr>
-						<tr>
-							<td>Nom:</td>
-							<td>{{ app.user.lastname }}</td>
-						</tr>
-						<tr>
-							<td>Prénom:</td>
-							<td>{{ app.user.firstname }}</td>
-						</tr>
-						<tr>
-							<td>E-mail:</td>
-							<td>{{ app.user.email }}</td>
-						</tr>
-					</table>
-				</div>
+				<div>Id:
+					{{ app.user.id }}</div>
+				<div>Nom:
+					{{ app.user.lastname }}</div>
+				<div>Prénom:
+					{{ app.user.firstname }}</div>
+				<div>E-mail:
+					{{ app.user.email }}</div>
 			</article>
 		</section>
-
-		<h2 class="text-center mx-auto m-3">Commentaire(s): {{ tabCommentaires|length }}</h2>
-
-		<section id="commentaires" class="col-md-10 mx-auto">
-			{% for comment in tabCommentaires %}
-				<div class="comment">
-					<div class="row">
-						<div class="col-md-3">
-							{{ comment.id }}
-							{{ comment.author.lastname }}<br>(<small>{{ comment.createdAt|date("d/m/y à H:m:s") }}</small>)
-						</div>
-						<div class="col-md-9">
-							{{ comment.content|raw }}
-						</div>
-					</div>
-				</div>
-				<hr>
-			{% endfor %}
-		</section>
+		<h2 class="text-center mx-auto m-3">Commentaire(s):
+			{{ tabCommentaires|length }}</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Contenu</th>
+					<th>Date</th>
+					<th>Article</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for comment in tabCommentaires %}
+					<tr>
+						<td>{{ comment.content }}</td>
+						<td>{{ comment.createdAt|date('d/m/Y à H:m:s') }}</td>
+						<td>
+							<a href="{{ path('blog_show', {id: comment.article.id}) }}" class="btn btn-sm btn-info">
+								<i class="fa-solid fa-eye"></i>
+							</a>
+							{{ comment.article.title }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 	{% else %}
 		<div class="alert alert-danger text-center">
-			Il faut être connecté pour voir son profil et ses commentaires !
-		</div>
+			Il faut être connecté pour voir son profil et ses commentaires !</div>
 	{% endif %}
-
 {% endblock %}
