@@ -22,7 +22,7 @@
 				{{ article.category.title }}
 			</div>
 			<div class="content">
-				<img class="img-fluid" src="{{ article.image }}" alt="Photo aléatoire depuis picsum">
+				<img class="img-fluid" src="/images/articles/{{ article.image }}" alt="Photo aléatoire depuis picsum">
 				{{ article.content|raw }}
 				<a href="{{ path('blog_edit', {id: article.id}) }}" class="btn btn-sm btn-warning">
 					<i class="fa-solid fa-pen"></i>
