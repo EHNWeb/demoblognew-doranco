@@ -20,11 +20,13 @@
 				<h2>{{ article.title }}</h2>
 				{# date() est un filtre TWIG permettant de formater/convertir un objet DateTime en une chaîne de caractères #}
 				<div class="metadata">
-					Ecrit le {{ article.createAt|date('d/m/Y à H:i:s') }} dans la catégorie {{ article.category.title }}
+					Ajouté le {{ article.createAt|date('d/m/Y à H:i:s') }}<br>
+					Catégorie {{ article.category.title }}
 				</div>
 				<div class="content">
-					<img class="img-fluid" src="{{ article.image }}" alt="Photo aléatoire depuis picsum">
+					<img class="img-fluid" src="{{  asset('images/articles/' ~ article.image) }}" alt="Photo {{ article.title }}">
 					{{ article.content|slice(0, 30)|raw }} ...<br>
+					<br>
 					<a href="{{ path('blog_show', {id: article.id}) }}" class="btn btn-primary">Lire la suite</a>
 					{# path() est une fonction TWIG permettant de générer un lien vers une page #}
 					{# cette fonction prend en 1er argument le nom de la route (name=xxxx) #}
