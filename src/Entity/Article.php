@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
-use Vich\UploaderBundle\Napping\Annotation as Vich;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
@@ -60,7 +60,7 @@ class Article
 
 
     /**
-     * @Vich\UploaableField(mapping="articles", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="articles", fileNameProperty="image")
      */
     private $imageFile;
 
