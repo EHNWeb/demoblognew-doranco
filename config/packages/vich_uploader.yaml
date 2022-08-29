@@ -1,0 +1,15 @@
+vich_uploader:
+    db_driver: orm
+
+    #mappings:
+    #    products:
+    #        uri_prefix: /images/products
+    #        upload_destination: '%kernel.project_dir%/public/images/products'
+    #        namer: Permet de donner un nom unique au fichier uploader
+    #        namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+    mappings:
+        articles:
+            uri_prefix: /images/articles
+            upload_destination: '%kernel.project_dir%/public/images/articles'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer

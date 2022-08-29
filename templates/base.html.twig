@@ -42,8 +42,8 @@
 								<a class="nav-link" href="{{ path('app_profil') }}">Profil</a>
 							</div>
 							<div class="nav-link">
-								{% if 'ROLE_ADMIN' in app.user.roles %}
-									<i class="fa-solid fa-user-gear"></i>
+								{% if is_granted("ROLE_ADMIN") %}
+									<a? class="nav-link" href="{{ path('app_blog') }}"><i class="fa-solid fa-user-gear"></i></a?
 								{% else %}
 									<i class="fa-solid fa-user"></i>
 								{% endif %}
