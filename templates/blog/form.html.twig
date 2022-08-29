@@ -36,7 +36,9 @@
                     placeholder: "Contenu de l'article"
                 }
             }) }}
-    {{ form_row(formArticle.image) }}
+    {{ form_row(formArticle.imageFile, {
+        label: "Ajouter un fichier"
+    }) }}
 
     {{ form_row(formArticle.category, {
         label: "Catégories"

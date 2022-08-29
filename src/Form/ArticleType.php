@@ -19,7 +19,9 @@ class ArticleType extends AbstractType
         $builder
             ->add('title')
             ->add('content')
-            ->add('image')
+            ->add('imageFile', FileType::class, [
+                'required' => false
+            ])
             ->add('category', EntityType::class, [    // On indique que le champ CATEGORY est une entité
                 'class' => Category::class,           // On indique que l'entité est CATEGORY
                 'choice_label' => 'title'             // On indique que je veux afficher les titres des categories
